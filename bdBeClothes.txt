@@ -1,0 +1,46 @@
+/==============================================================/
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     Ago 2022 Belem Martinez                   */
+/==============================================================/
+
+
+alter table ropa
+   drop foreign key FK_ropa_user_ropa_user;
+
+
+alter table ROPA 
+   drop foreign key FK_ropa_user_ropa_user;
+
+drop table if exists ropa
+
+drop table if exists user;
+
+/==============================================================/
+/* Table: ROPA                                                  */
+/==============================================================/
+create table ropa
+(
+   cve_ropa            varchar(20) not null  comment '',
+   cve_user            varchar(20) not null  comment '',
+   nom_ropa             varchar(50) not null  comment '',
+   color_ropa           varchar(50) not null  comment '',
+   talla_ropa           varchar(5) not null  comment '',
+   desc_ropa           varchar(100) not null  comment '',
+   precio_ropa          decimal(6,2) not null  comment '',
+   primary key (cve_ropa)
+);
+
+/==============================================================/
+/* Table: USER                                                  */
+/==============================================================/
+create table user
+(
+   cve_user             varchar(20) not null  comment '',
+   nom_user             varchar(50) not null  comment '',
+   apellidop_user       varchar(50) not null  comment '',
+   apellidom_user       varchar(50) not null  comment '',
+   primary key (cve_user)
+);
+
+alter table ropa add constraint FK_ropa_user_ropa_user foreign key (cve_user)
+      references USER (cve_user) on delete restrict on update restrict;
